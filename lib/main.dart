@@ -1,3 +1,4 @@
+import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/login_screen.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       home: const LoginScreen(),
+      routes: {'/signup': (context) => const SignUpScreen()},
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,7 +32,15 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.chevron_left, size: 24, color: textColor),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(
+                        Icons.chevron_left,
+                        size: 24,
+                        color: textColor,
+                      ),
+                      onPressed: () {},
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Log in or sign up',
@@ -170,6 +180,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: colorScheme.primary,
                             decoration: TextDecoration.underline,
                           ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUpScreen(),
+                                ),
+                              );
+                            },
                         ),
                       ],
                     ),
@@ -275,7 +294,13 @@ class _InputFieldState extends State<_InputField> {
       style: TextStyle(color: textColor),
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: TextStyle(color: textColor),
+        labelStyle: MaterialStateTextStyle.resolveWith(
+          (states) => TextStyle(
+            color: states.contains(MaterialState.focused)
+                ? colorScheme.primary
+                : textColor,
+          ),
+        ),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
@@ -292,6 +317,11 @@ class _InputFieldState extends State<_InputField> {
             ? Colors.white
             : colorScheme.surface,
         filled: true,
+        prefixIcon: widget.label.toLowerCase().contains('email')
+            ? Icon(Icons.email, color: Theme.of(context).colorScheme.onSurface)
+            : widget.label.toLowerCase().contains('password')
+            ? Icon(Icons.lock, color: Theme.of(context).colorScheme.onSurface)
+            : null,
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(
