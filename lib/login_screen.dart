@@ -55,9 +55,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 Column(
                   children: [
-                    _InputField(label: 'Email'),
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        inputDecorationTheme: const InputDecorationTheme(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            borderSide: BorderSide(
+                              color: Color(0xFF3879E9),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: _InputField(label: 'Email'),
+                    ),
                     const SizedBox(height: 12),
-                    _InputField(label: 'Password', obscureText: true),
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        inputDecorationTheme: const InputDecorationTheme(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            borderSide: BorderSide(
+                              color: Color(0xFF3879E9),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: _InputField(label: 'Password', obscureText: true),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -272,11 +298,16 @@ class _InputField extends StatefulWidget {
 
 class _InputFieldState extends State<_InputField> {
   late bool _obscureText;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
     _obscureText = widget.obscureText;
+    _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      setState(() {}); // rebuilds when focus changes
+    });
   }
 
   void _toggleObscureText() {
@@ -291,21 +322,11 @@ class _InputFieldState extends State<_InputField> {
     final textColor = colorScheme.onSurface;
     return TextField(
       obscureText: _obscureText,
+      focusNode: _focusNode,
       style: TextStyle(color: textColor),
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: MaterialStateTextStyle.resolveWith(
-          (states) => TextStyle(
-            color: states.contains(MaterialState.focused)
-                ? colorScheme.primary
-                : textColor,
-          ),
-        ),
         border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
-          borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
-        ),
-        focusedBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
         ),
@@ -335,5 +356,11 @@ class _InputFieldState extends State<_InputField> {
             : null,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 }
