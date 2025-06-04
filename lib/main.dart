@@ -1,8 +1,16 @@
 import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/login_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ),
+  );
   runApp(const MyApp());
 }
 

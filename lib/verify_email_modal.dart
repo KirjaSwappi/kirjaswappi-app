@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'reset_password_screen.dart';
 
 class VerifyEmailModal extends StatelessWidget {
   const VerifyEmailModal({super.key});
@@ -106,7 +107,22 @@ class VerifyEmailModal extends StatelessWidget {
                   height: 42,
                   child: ElevatedButton(
                     onPressed: () {
-                      // TODO: Continue button logic
+                      final enteredOtp = _OtpFieldsState.controllers
+                          .map((c) => c.text)
+                          .join();
+                      if (enteredOtp == '111111') {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => const ResetPasswordScreen(),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Incorrect OTP. Please try again."),
+                          ),
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
@@ -152,7 +168,7 @@ class _OtpFields extends StatefulWidget {
 }
 
 class _OtpFieldsState extends State<_OtpFields> {
-  final List<TextEditingController> _controllers = List.generate(
+  static final List<TextEditingController> controllers = List.generate(
     6,
     (index) => TextEditingController(),
   );
@@ -160,7 +176,7 @@ class _OtpFieldsState extends State<_OtpFields> {
 
   @override
   void dispose() {
-    for (final c in _controllers) {
+    for (final c in controllers) {
       c.dispose();
     }
     for (final f in _focusNodes) {
@@ -185,7 +201,7 @@ class _OtpFieldsState extends State<_OtpFields> {
         return SizedBox(
           width: 40,
           child: TextField(
-            controller: _controllers[i],
+            controller: controllers[i],
             focusNode: _focusNodes[i],
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
