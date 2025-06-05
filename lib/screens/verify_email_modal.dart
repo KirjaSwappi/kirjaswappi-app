@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import '../widgets/primary_button.dart';
 import 'reset_password_screen.dart';
 
-class VerifyEmailModal extends StatelessWidget {
+class VerifyEmailModal extends StatefulWidget {
   const VerifyEmailModal({super.key});
+
+  @override
+  State<VerifyEmailModal> createState() => _VerifyEmailModalState();
+}
+
+class _VerifyEmailModalState extends State<VerifyEmailModal> {
+  String _otpCode = '';
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,7 @@ class VerifyEmailModal extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: Colors.black.withOpacity(0.3), // Dimmed background
+        backgroundColor: Colors.black.withOpacity(0.3),
         body: Center(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 64),
@@ -32,30 +40,25 @@ class VerifyEmailModal extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: Icon(
-                        Icons.chevron_left,
-                        size: 24,
-                        color: textColor,
-                      ),
-                      padding: EdgeInsets.zero,
+                      icon: Icon(Icons.chevron_left, color: textColor),
                       onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       'Create an Account',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
+                        color: textColor,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
-                Text(
+                const Text(
                   "Confirm your Email",
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -72,7 +75,7 @@ class VerifyEmailModal extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                _OtpFields(),
+                _OtpFields(onOtpChanged: (otp) => _otpCode = otp),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +90,7 @@ class VerifyEmailModal extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // TODO: Resend code logic
+                        // TODO: Resend OTP
                       },
                       child: Text(
                         "Send again",
@@ -95,7 +98,7 @@ class VerifyEmailModal extends StatelessWidget {
                           fontFamily: 'Poppins',
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
                       ),
@@ -103,55 +106,23 @@ class VerifyEmailModal extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                SizedBox(
-                  height: 42,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final enteredOtp = _OtpFieldsState.controllers
-                          .map((c) => c.text)
-                          .join();
-                      if (enteredOtp == '111111') {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const ResetPasswordScreen(),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Incorrect OTP. Please try again."),
-                          ),
-                        );
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        colorScheme.primary,
-                      ),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                PrimaryButton(
+                  text: "Continue",
+                  onPressed: () {
+                    if (_otpCode == '111111') {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (_) => const ResetPasswordScreen(),
                         ),
-                      ),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-                        Set<MaterialState> states,
-                      ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return colorScheme.onPrimary.withOpacity(0.12);
-                        }
-                        return null;
-                      }),
-                    ),
-                    child: const Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Incorrect OTP. Please try again."),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -163,20 +134,24 @@ class VerifyEmailModal extends StatelessWidget {
 }
 
 class _OtpFields extends StatefulWidget {
+  final void Function(String) onOtpChanged;
+  const _OtpFields({required this.onOtpChanged});
+
   @override
   State<_OtpFields> createState() => _OtpFieldsState();
 }
 
 class _OtpFieldsState extends State<_OtpFields> {
-  static final List<TextEditingController> controllers = List.generate(
+  final List<TextEditingController> _controllers = List.generate(
     6,
-    (index) => TextEditingController(),
+    (_) => TextEditingController(),
   );
-  final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
+
+  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
 
   @override
   void dispose() {
-    for (final c in controllers) {
+    for (final c in _controllers) {
       c.dispose();
     }
     for (final f in _focusNodes) {
@@ -201,17 +176,17 @@ class _OtpFieldsState extends State<_OtpFields> {
         return SizedBox(
           width: 40,
           child: TextField(
-            controller: controllers[i],
+            controller: _controllers[i],
             focusNode: _focusNodes[i],
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             maxLength: 1,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               letterSpacing: 2,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             decoration: InputDecoration(
               counterText: '',
@@ -224,16 +199,18 @@ class _OtpFieldsState extends State<_OtpFields> {
                 ),
               ),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: Theme.of(context).brightness == Brightness.light
+                  ? Colors.white
+                  : Theme.of(context).colorScheme.surface,
               contentPadding: const EdgeInsets.symmetric(vertical: 12),
             ),
             onChanged: (value) {
               if (value.length == 1 && i < 5) {
                 _focusNodes[i + 1].requestFocus();
-              }
-              if (value.isEmpty && i > 0) {
+              } else if (value.isEmpty && i > 0) {
                 _focusNodes[i - 1].requestFocus();
               }
+              widget.onOtpChanged(_controllers.map((c) => c.text).join());
             },
           ),
         );

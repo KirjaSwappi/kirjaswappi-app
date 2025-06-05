@@ -1,11 +1,12 @@
-import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/login_screen.dart';
 import 'package:flutter/services.dart';
+import 'core/themes/app_theme.dart';
+import 'screens/login_screen.dart';
+import 'screens/sign_up_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
       statusBarColor: Colors.transparent,
@@ -22,31 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Practice App',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: const Color(0xFFF2F4F8),
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF3879E9),
-          onPrimary: Colors.white,
-          surface: Colors.white,
-          onSurface: Colors.black,
-          outline: Colors.grey,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.dark(
-          primary: Color(0xFF3879E9),
-          onPrimary: Colors.white,
-          surface: Color(0xFF1E1E1E),
-          onSurface: Colors.white,
-          outline: Colors.grey,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       home: const LoginScreen(),
       routes: {'/signup': (context) => const SignUpScreen()},
