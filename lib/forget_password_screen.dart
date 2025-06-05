@@ -117,17 +117,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           backgroundColor: WidgetStateProperty.all(
                             colorScheme.primary,
                           ),
-                          overlayColor:
-                              WidgetStateProperty.resolveWith<Color?>((
-                                Set<MaterialState> states,
-                              ) {
-                                if (states.contains(MaterialState.pressed)) {
-                                  return colorScheme.onPrimary.withOpacity(
-                                    0.12,
-                                  );
-                                }
-                                return null;
-                              }),
+                          overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return colorScheme.onPrimary.withOpacity(0.12);
+                              }
+                              return null;
+                            },
+                          ),
                           shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
