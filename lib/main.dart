@@ -1,11 +1,13 @@
-import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/login_screen.dart';
 import 'package:flutter/services.dart';
+import 'login_screen.dart';
+import 'sign_up_screen.dart';
+import 'reset_password_screen.dart';
+import 'forget_password_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
       statusBarColor: Colors.transparent,
@@ -19,15 +21,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xFF3879E9);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Practice App',
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: const Color(0xFFF2F4F8),
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF3879E9),
+        primaryColor: primaryColor,
+        colorScheme: const ColorScheme.light(
+          primary: primaryColor,
           onPrimary: Colors.white,
           surface: Colors.white,
           onSurface: Colors.black,
@@ -37,9 +41,9 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.dark(
-          primary: Color(0xFF3879E9),
+        primaryColor: primaryColor,
+        colorScheme: const ColorScheme.dark(
+          primary: primaryColor,
           onPrimary: Colors.white,
           surface: Color(0xFF1E1E1E),
           onSurface: Colors.white,
@@ -49,7 +53,11 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       home: const LoginScreen(),
-      routes: {'/signup': (context) => const SignUpScreen()},
+      routes: {
+        '/signup': (context) => const SignUpScreen(),
+        '/reset-password': (context) => const ResetPasswordScreen(),
+        '/forget-password': (context) => const ForgetPasswordScreen(),
+      },
     );
   }
 }
