@@ -1,4 +1,4 @@
-# Kirjaswappi App
+# KirjaSwappi App
 
 A Flutter project for KirjaSwappi Platform.
 
