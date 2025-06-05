@@ -1,11 +1,13 @@
-import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/login_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:practice_app/screens/login_screen.dart';
+import 'package:practice_app/screens/sign_up_screen.dart';
 
+// Entry point of the application
 void main() {
+  // Set system UI overlay style for status bar
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
       statusBarColor: Colors.transparent,
@@ -19,15 +21,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define primary color for reuse
+    const primaryColor = Color(0xFF3879E9);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Practice App',
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: const Color(0xFFF2F4F8),
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF3879E9),
+        primaryColor: primaryColor,
+        colorScheme: const ColorScheme.light(
+          primary: primaryColor,
           onPrimary: Colors.white,
           surface: Colors.white,
           onSurface: Colors.black,
@@ -37,9 +42,9 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.dark(
-          primary: Color(0xFF3879E9),
+        primaryColor: primaryColor,
+        colorScheme: const ColorScheme.dark(
+          primary: primaryColor,
           onPrimary: Colors.white,
           surface: Color(0xFF1E1E1E),
           onSurface: Colors.white,

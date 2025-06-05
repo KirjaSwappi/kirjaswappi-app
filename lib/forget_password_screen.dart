@@ -60,7 +60,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
-                        color: textColor.withOpacity(0.8),
+                        color: textColor.withValues(a: 0.8),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -96,7 +96,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 12,
-                        color: textColor.withOpacity(0.7),
+                        color: textColor.withValues(a: 0.7),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -114,11 +114,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all(
                             colorScheme.primary,
                           ),
                           overlayColor:
-                              MaterialStateProperty.resolveWith<Color?>((
+                              WidgetStateProperty.resolveWith<Color?>((
                                 Set<MaterialState> states,
                               ) {
                                 if (states.contains(MaterialState.pressed)) {
@@ -128,7 +128,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 }
                                 return null;
                               }),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
