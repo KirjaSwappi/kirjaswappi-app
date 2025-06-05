@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:practice_app/screens/login_screen.dart';
-import 'package:practice_app/screens/sign_up_screen.dart';
+import 'login_screen.dart';
+import 'sign_up_screen.dart';
+import 'reset_password_screen.dart';
+import 'forget_password_screen.dart';
 
-// Entry point of the application
 void main() {
-  // Set system UI overlay style for status bar
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define primary color for reuse
     const primaryColor = Color(0xFF3879E9);
 
     return MaterialApp(
@@ -54,7 +53,11 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       home: const LoginScreen(),
-      routes: {'/signup': (context) => const SignUpScreen()},
+      routes: {
+        '/signup': (context) => const SignUpScreen(),
+        '/reset-password': (context) => const ResetPasswordScreen(),
+        '/forget-password': (context) => const ForgetPasswordScreen(),
+      },
     );
   }
 }
