@@ -88,7 +88,7 @@ class _ForgetPasswordScreenState extends ConsumerState<ForgetPasswordScreen> {
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
-                            .withOpacity(0.8),
+                            .withAlpha(204),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -115,7 +115,7 @@ class _ForgetPasswordScreenState extends ConsumerState<ForgetPasswordScreen> {
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
-                            .withOpacity(0.7),
+                            .withAlpha(170),
                       ),
                     ),
                     const SizedBox(height: 20),

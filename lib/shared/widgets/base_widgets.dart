@@ -20,21 +20,21 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             const Color(0xFF3879E9),
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Colors.white.withOpacity(0.12);
+          overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(WidgetState.pressed)) {
+              return Colors.white.withAlpha(204);
             }
             return null;
           }),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          elevation: MaterialStateProperty.all(2),
+          elevation: WidgetStateProperty.all(2),
         ),
         child: isLoading
             ? const SizedBox(
@@ -95,13 +95,13 @@ class AppTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
-            color: const Color(0xFF3879E9).withOpacity(0.4),
+            color: const Color(0xFF3879E9).withAlpha(64),
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
-            color: const Color(0xFF3879E9).withOpacity(0.4),
+            color: const Color(0xFF3879E9).withAlpha(64),
           ),
         ),
         focusedBorder: OutlineInputBorder(

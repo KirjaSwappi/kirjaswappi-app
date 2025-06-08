@@ -135,9 +135,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           Checkbox(
                             value: _rememberMe,
                             checkColor: Colors.white,
-                            fillColor: MaterialStateProperty.resolveWith<Color>(
+                            fillColor: WidgetStateProperty.resolveWith<Color>(
                                 (states) {
-                              if (states.contains(MaterialState.selected)) {
+                              if (states.contains(WidgetState.selected)) {
                                 return const Color(0xFF3879E9);
                               }
                               return const Color(0xFFF2F4F8);
@@ -225,7 +225,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     children: [
                       Expanded(
                         child: Divider(
-                          color: colorScheme.outline.withOpacity(0.4),
+                          color: colorScheme.outline.withAlpha(204),
                         ),
                       ),
                       Padding(
@@ -240,7 +240,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       Expanded(
                         child: Divider(
-                          color: colorScheme.outline.withOpacity(0.4),
+                          color: colorScheme.outline.withAlpha(204),
                         ),
                       ),
                     ],
@@ -255,7 +255,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       side: BorderSide(
-                        color: colorScheme.outline.withOpacity(0.4),
+                        color: colorScheme.outline.withAlpha(204),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),

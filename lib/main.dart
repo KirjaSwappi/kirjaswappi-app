@@ -32,13 +32,13 @@ class MyApp extends ConsumerWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: const Color(0xFF3879E9).withOpacity(0.4),
+              color: const Color(0xFF3879E9).withAlpha(102),
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: const Color(0xFF3879E9).withOpacity(0.4),
+              color: const Color(0xFF3879E9).withAlpha(102),
             ),
           ),
           focusedBorder: OutlineInputBorder(

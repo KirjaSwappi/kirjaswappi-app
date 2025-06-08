@@ -166,7 +166,7 @@ class _VerifyEmailModalState extends ConsumerState<VerifyEmailModal> {
                       fontFamily: 'Poppins',
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
-                      color: textColor.withOpacity(0.7),
+                      color: textColor.withAlpha(204),
                     ),
                   ),
                 ),
@@ -231,7 +231,7 @@ class _VerifyEmailModalState extends ConsumerState<VerifyEmailModal> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 13,
-                        color: textColor.withOpacity(0.7),
+                        color: textColor.withAlpha(204),
                       ),
                       children: [
                         TextSpan(

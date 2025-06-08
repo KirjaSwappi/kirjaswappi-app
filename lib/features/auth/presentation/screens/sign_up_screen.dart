@@ -154,7 +154,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
-                            .withOpacity(0.8),
+                            .withAlpha(204),
                       ),
                     ),
                     TextButton(
