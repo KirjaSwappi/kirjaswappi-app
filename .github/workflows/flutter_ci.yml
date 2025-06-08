@@ -1,6 +1,8 @@
-name: PR Pipeline
+name: Flutter CI
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
