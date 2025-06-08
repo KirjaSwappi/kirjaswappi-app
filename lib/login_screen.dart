@@ -123,8 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             color:
                                 Theme.of(context).brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white,
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                       ],
@@ -143,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           color:
                               Theme.of(context).brightness == Brightness.light
-                              ? Colors.black
-                              : Colors.white,
+                                  ? Colors.black
+                                  : Colors.white,
                         ),
                       ),
                     ),
@@ -255,8 +255,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: OutlinedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
-                          ? Colors.white
-                          : colorScheme.surface,
+                              ? Colors.white
+                              : colorScheme.surface,
                       minimumSize: const Size.fromHeight(42),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -349,8 +349,9 @@ class _InputFieldState extends State<_InputField> {
         prefixIcon: widget.label.toLowerCase().contains('email')
             ? Icon(Icons.email, color: Theme.of(context).colorScheme.onSurface)
             : widget.label.toLowerCase().contains('password')
-            ? Icon(Icons.lock, color: Theme.of(context).colorScheme.onSurface)
-            : null,
+                ? Icon(Icons.lock,
+                    color: Theme.of(context).colorScheme.onSurface)
+                : null,
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(

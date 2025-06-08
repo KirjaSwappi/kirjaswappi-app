@@ -107,9 +107,8 @@ class VerifyEmailModal extends StatelessWidget {
                   height: 42,
                   child: ElevatedButton(
                     onPressed: () {
-                      final enteredOtp = _OtpFieldsState.controllers
-                          .map((c) => c.text)
-                          .join();
+                      final enteredOtp =
+                          _OtpFieldsState.controllers.map((c) => c.text).join();
                       if (enteredOtp == '111111') {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(

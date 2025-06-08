@@ -1,55 +1,76 @@
-import 'package:practice_app/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/login_screen.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/router/app_router.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: Colors.transparent,
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
     ),
   );
-  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Practice App',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
+      title: 'KirjaSwappi',
       theme: ThemeData(
-        brightness: Brightness.light,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF3879E9),
+          brightness: Brightness.light,
+        ),
         scaffoldBackgroundColor: const Color(0xFFF2F4F8),
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF3879E9),
-          onPrimary: Colors.white,
-          surface: Colors.white,
-          onSurface: Colors.black,
-          outline: Colors.grey,
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: const Color(0xFF3879E9).withOpacity(0.4),
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: const Color(0xFF3879E9).withOpacity(0.4),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(
+              color: Color(0xFF3879E9),
+              width: 1,
+            ),
+          ),
+          labelStyle: const TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 14,
+          ),
         ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Color(0xFF3879E9),
-        colorScheme: ColorScheme.dark(
-          primary: Color(0xFF3879E9),
-          onPrimary: Colors.white,
-          surface: Color(0xFF1E1E1E),
-          onSurface: Colors.white,
-          outline: Colors.grey,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontFamily: 'Poppins'),
+          bodyMedium: TextStyle(fontFamily: 'Poppins'),
+          titleLarge: TextStyle(fontFamily: 'Poppins'),
         ),
-        useMaterial3: true,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF3879E9),
+            foregroundColor: Colors.white,
+            minimumSize: const Size.fromHeight(42),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            elevation: 2,
+          ),
+        ),
       ),
-      themeMode: ThemeMode.system,
-      home: const LoginScreen(),
-      routes: {'/signup': (context) => const SignUpScreen()},
+      routerConfig: router,
     );
   }
 }
