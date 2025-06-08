@@ -96,10 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         Checkbox(
                           value: _rememberMe,
                           checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.resolveWith<Color>((
+                          fillColor: WidgetStateProperty.resolveWith<Color>((
                             states,
                           ) {
-                            if (states.contains(MaterialState.selected)) {
+                            if (states.contains(WidgetState.selected)) {
                               return Theme.of(context).brightness ==
                                       Brightness.light
                                   ? const Color(0xFF3879E9)
@@ -123,8 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             color:
                                 Theme.of(context).brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white,
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                       ],
@@ -143,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           color:
                               Theme.of(context).brightness == Brightness.light
-                              ? Colors.black
-                              : Colors.white,
+                                  ? Colors.black
+                                  : Colors.white,
                         ),
                       ),
                     ),
@@ -156,25 +156,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         Theme.of(context).brightness == Brightness.light
                             ? const Color(0xFF3879E9)
                             : colorScheme.primary,
                       ),
-                      minimumSize: MaterialStateProperty.all(
+                      minimumSize: WidgetStateProperty.all(
                         const Size.fromHeight(42),
                       ),
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      elevation: MaterialStateProperty.all(2),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-                        Set<MaterialState> states,
+                      elevation: WidgetStateProperty.all(2),
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                        states,
                       ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return colorScheme.onPrimary.withOpacity(0.12);
+                        if (states.contains(WidgetState.pressed)) {
+                          return colorScheme.onPrimary.withAlpha(31);
                         }
                         return null;
                       }),
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Expanded(
                       child: Divider(
-                        color: colorScheme.outline.withOpacity(0.4),
+                        color: colorScheme.outline.withAlpha(102),
                       ),
                     ),
                     Padding(
@@ -242,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Expanded(
                       child: Divider(
-                        color: colorScheme.outline.withOpacity(0.4),
+                        color: colorScheme.outline.withAlpha(102),
                       ),
                     ),
                   ],
@@ -255,14 +255,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: OutlinedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
-                          ? Colors.white
-                          : colorScheme.surface,
+                              ? Colors.white
+                              : colorScheme.surface,
                       minimumSize: const Size.fromHeight(42),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       side: BorderSide(
-                        color: colorScheme.outline.withOpacity(0.4),
+                        color: colorScheme.outline.withAlpha(102),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
@@ -336,11 +336,11 @@ class _InputFieldState extends State<_InputField> {
         labelText: widget.label,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
+          borderSide: BorderSide(color: colorScheme.outline.withAlpha(102)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
+          borderSide: BorderSide(color: colorScheme.outline.withAlpha(102)),
         ),
         fillColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
@@ -349,8 +349,9 @@ class _InputFieldState extends State<_InputField> {
         prefixIcon: widget.label.toLowerCase().contains('email')
             ? Icon(Icons.email, color: Theme.of(context).colorScheme.onSurface)
             : widget.label.toLowerCase().contains('password')
-            ? Icon(Icons.lock, color: Theme.of(context).colorScheme.onSurface)
-            : null,
+                ? Icon(Icons.lock,
+                    color: Theme.of(context).colorScheme.onSurface)
+                : null,
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(

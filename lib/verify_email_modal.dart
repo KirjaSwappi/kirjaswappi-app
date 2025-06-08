@@ -15,7 +15,7 @@ class VerifyEmailModal extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: Colors.black.withOpacity(0.3), // Dimmed background
+        backgroundColor: Colors.black.withAlpha(77), // Dimmed background
         body: Center(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 64),
@@ -68,7 +68,7 @@ class VerifyEmailModal extends StatelessWidget {
                     fontFamily: 'Poppins',
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
-                    color: textColor.withOpacity(0.7),
+                    color: textColor.withAlpha(178),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -82,7 +82,7 @@ class VerifyEmailModal extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 13,
-                        color: textColor.withOpacity(0.7),
+                        color: textColor.withAlpha(178),
                       ),
                     ),
                     GestureDetector(
@@ -107,9 +107,8 @@ class VerifyEmailModal extends StatelessWidget {
                   height: 42,
                   child: ElevatedButton(
                     onPressed: () {
-                      final enteredOtp = _OtpFieldsState.controllers
-                          .map((c) => c.text)
-                          .join();
+                      final enteredOtp =
+                          _OtpFieldsState.controllers.map((c) => c.text).join();
                       if (enteredOtp == '111111') {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
@@ -125,19 +124,19 @@ class VerifyEmailModal extends StatelessWidget {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         colorScheme.primary,
                       ),
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-                        Set<MaterialState> states,
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                        Set<WidgetState> states,
                       ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return colorScheme.onPrimary.withOpacity(0.12);
+                        if (states.contains(WidgetState.pressed)) {
+                          return colorScheme.onPrimary.withAlpha(12);
                         }
                         return null;
                       }),
@@ -190,7 +189,7 @@ class _OtpFieldsState extends State<_OtpFields> {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+        color: Theme.of(context).colorScheme.primary.withAlpha(102),
         width: 1.4,
       ),
     );

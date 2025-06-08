@@ -1,5 +1,5 @@
-import 'package:practice_app/verify_email_modal.dart';
 import 'package:flutter/material.dart';
+import 'features/auth/presentation/screens/verify_email_modal.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -60,7 +60,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
-                        color: textColor.withOpacity(0.8),
+                        color: textColor.withAlpha(204),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -74,8 +74,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         filled: true,
                         fillColor:
                             Theme.of(context).brightness == Brightness.light
-                            ? Colors.white
-                            : colorScheme.surface,
+                                ? Colors.white
+                                : colorScheme.surface,
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -96,7 +96,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 12,
-                        color: textColor.withOpacity(0.7),
+                        color: textColor.withAlpha(170),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -114,21 +114,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all(
                             colorScheme.primary,
                           ),
                           overlayColor:
-                              MaterialStateProperty.resolveWith<Color?>((
-                                Set<MaterialState> states,
-                              ) {
-                                if (states.contains(MaterialState.pressed)) {
-                                  return colorScheme.onPrimary.withOpacity(
-                                    0.12,
-                                  );
-                                }
-                                return null;
-                              }),
-                          shape: MaterialStateProperty.all(
+                              WidgetStateProperty.resolveWith<Color?>((states) {
+                            if (states.contains(WidgetState.pressed)) {
+                              return colorScheme.onPrimary
+                                  .withAlpha(31); // 0.12 * 255 ≈ 31
+                            }
+                            return null;
+                          }),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),

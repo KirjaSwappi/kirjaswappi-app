@@ -109,18 +109,18 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         colorScheme.primary,
                       ),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>((
                         states,
                       ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return colorScheme.onPrimary.withOpacity(0.12);
+                        if (states.contains(WidgetState.pressed)) {
+                          return colorScheme.onPrimary.withAlpha(31);
                         }
                         return null;
                       }),
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),

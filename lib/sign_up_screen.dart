@@ -134,22 +134,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: _obscureConfirmPassword,
-                  decoration: _inputDecoration(context, 'Confirm Password')
-                      .copyWith(
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureConfirmPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureConfirmPassword =
-                                  !_obscureConfirmPassword;
-                            });
-                          },
-                        ),
+                  decoration:
+                      _inputDecoration(context, 'Confirm Password').copyWith(
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureConfirmPassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
+                        });
+                      },
+                    ),
+                  ),
                   validator: _validateConfirmPassword,
                 ),
                 const SizedBox(height: 16),
@@ -182,22 +181,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         colorScheme.primary,
                       ),
-                      minimumSize: MaterialStateProperty.all(
+                      minimumSize: WidgetStateProperty.all(
                         const Size.fromHeight(42),
                       ),
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-                        Set<MaterialState> states,
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                        Set<WidgetState> states,
                       ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return colorScheme.onPrimary.withOpacity(0.12);
+                        if (states.contains(WidgetState.pressed)) {
+                          return colorScheme.onPrimary.withAlpha(31);
                         }
                         return null;
                       }),
@@ -244,7 +243,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       labelText: label,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
+        borderSide: BorderSide(color: colorScheme.outline.withAlpha(102)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
@@ -252,7 +251,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.4)),
+        borderSide: BorderSide(color: colorScheme.outline.withAlpha(102)),
       ),
       filled: true,
       fillColor: Theme.of(context).brightness == Brightness.light
