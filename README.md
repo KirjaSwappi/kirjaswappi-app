@@ -1,4 +1,4 @@
-# KirjaSwapp
+# KirjaSwappi App
 
 A Flutter application for book swapping and trading, built with modern architecture and best practices.
 
