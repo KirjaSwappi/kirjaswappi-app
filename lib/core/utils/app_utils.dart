@@ -27,7 +27,7 @@ class AppUtils {
   }
 
   static bool isValidPassword(String password) {
-    return password.length >= 8 && password.length <= 32;
+    return password.length >= 6 && password.length <= 32;
   }
 
   static String getInitials(String name) {
