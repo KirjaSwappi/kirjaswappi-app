@@ -49,7 +49,7 @@ lib/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/kirjaswappi-app.git
+git clone https://github.com/KirjaSwappi/kirjaswappi-app.git
 ```
 
 2. Navigate to the project directory:
