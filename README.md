@@ -1,6 +1,6 @@
 # KirjaSwappi App
 
-A Flutter application for book swapping and trading, built with modern architecture and best practices.
+This repository contains the KirjaSwappi app for the KirjaSwappi Platform. The KirjaSwappi app is a Flutter Application.
 
 ## Features
 
